@@ -31,6 +31,7 @@
     "start": "npm run dev",
     "dev": "(cd ./example && vite --force)",
     "build": "npm run clean && npm i && npm run build:esm && npm run build:copy-styles && npm run build:example && npm run build:docs",
+    "prepare": "npm run build:esm && npm run build:copy-styles",
     "build:esm": "tsc",
     "build:copy-styles": "cp -r ./src/style ./dist/esm",
     "build:example": "(cd ./example && tsc && vite build && mkdir \"../public/\" && cp -r example-app ../public/)",
