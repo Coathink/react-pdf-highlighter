@@ -55,7 +55,7 @@ export interface TextHighlightProps {
   style?: CSSProperties;
 
   /**
-   * Optional highlight identifier applied as data-highlight-id on the outer container.
+   * Optional highlight identifier applied as data-highlight-id on each visible highlight part.
    */
   highlightId?: string;
 }
@@ -82,7 +82,6 @@ export const TextHighlight = ({
     <div
       className={`TextHighlight ${highlightClass}`}
       onContextMenu={onContextMenu}
-      data-highlight-id={highlightId}
     >
       <div className="TextHighlight__parts">
         {rects.map((rect, index) => (
@@ -93,6 +92,7 @@ export const TextHighlight = ({
             key={index}
             style={{ ...rect, ...style }}
             className={`TextHighlight__part`}
+            data-highlight-id={highlightId}
           />
         ))}
       </div>
