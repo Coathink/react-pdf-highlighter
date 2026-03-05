@@ -55,9 +55,9 @@ export interface TextHighlightProps {
   style?: CSSProperties;
 
   /**
-   * Optional data-testid applied to the outer TextHighlight container.
+   * Optional highlight identifier applied as data-highlight-id on the outer container.
    */
-  dataTestId?: string;
+  highlightId?: string;
 }
 
 /**
@@ -73,7 +73,7 @@ export const TextHighlight = ({
   isScrolledTo,
   onContextMenu,
   style,
-  dataTestId,
+  highlightId,
 }: TextHighlightProps) => {
   const highlightClass = isScrolledTo ? "TextHighlight--scrolledTo" : "";
   const { rects } = highlight.position;
@@ -82,7 +82,7 @@ export const TextHighlight = ({
     <div
       className={`TextHighlight ${highlightClass}`}
       onContextMenu={onContextMenu}
-      data-testid={dataTestId}
+      data-highlight-id={highlightId}
     >
       <div className="TextHighlight__parts">
         {rects.map((rect, index) => (
