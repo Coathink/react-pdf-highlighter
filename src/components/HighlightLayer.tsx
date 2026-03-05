@@ -6,6 +6,7 @@ import {
 } from "../contexts/HighlightContext";
 import { scaledPositionToViewport, viewportToScaled } from "../lib/coordinates";
 import screenshot from "../lib/screenshot";
+import { TextHighlight } from "./TextHighlight";
 import {
   GhostHighlight,
   Highlight,
@@ -78,7 +79,7 @@ export const HighlightLayer = ({
 
   return (
     <div>
-      {currentHighlights.map((highlight, index) => {
+      {currentHighlights.map((highlight) => {
         const viewportHighlight: ViewportHighlight = {
           ...highlight,
           id: "id" in highlight ? highlight.id : EMPTY_ID, // Give Empty ID to GhostHighlight
@@ -104,8 +105,19 @@ export const HighlightLayer = ({
           highlightBindings,
         };
 
+        if (viewportHighlight.id === EMPTY_ID) {
+          return (
+            <HighlightContext.Provider value={highlightUtils} key={viewportHighlight.id}>
+              <TextHighlight
+                highlight={viewportHighlight}
+                isScrolledTo={false}
+              />
+            </HighlightContext.Provider>
+          );
+        }
+
         return (
-          <HighlightContext.Provider value={highlightUtils} key={index}>
+          <HighlightContext.Provider value={highlightUtils} key={viewportHighlight.id}>
             {children}
           </HighlightContext.Provider>
         );
