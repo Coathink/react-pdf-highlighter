@@ -111,6 +111,7 @@ export const HighlightLayer = ({
               <TextHighlight
                 highlight={viewportHighlight}
                 isScrolledTo={false}
+                style={{ pointerEvents: "none" }}
               />
             </HighlightContext.Provider>
           );
